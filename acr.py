@@ -193,7 +193,7 @@ def correct_angle(data: Data) -> Data:
                 )),
             label = 'Save',
             color = 'w',
-            
+            )
     def save_button_click(event):
         global save
         save = True
