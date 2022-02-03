@@ -19,6 +19,8 @@ Simple script to load data from a rotator and correct for common errors in a rot
 ```sh
 python acr.py -i inputfile.dat -o outputfile.acr.dat
 ```
+Then adjust your parameters in the GUI.
+![GUI](img/acr_gui_sample.png)
 Use this at your own risk and check the contents of the script beforehand.
 
 
