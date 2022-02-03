@@ -11,7 +11,7 @@ Simple script to load data from a rotator and correct for common errors in a rot
 - To correct for an initial phase in a meaningful way, have a look at your sample when installing it.
 
 ## Usage
-```
+```sh
 python acr.py -i inputfile.dat -o outputfile.acr.dat
 ```
 Use this at your own risk and check the contents of the script beforehand.
