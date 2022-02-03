@@ -2,6 +2,11 @@
 
 Simple script to load data from a rotator and correct for common errors in a rotator setup.
 
+## Dependencies
+- `python`
+- `numpy`
+- `matplotlib`
+
 ## Prerequisites
 
 - Rotation should be performed at otherwise stable conditions.
