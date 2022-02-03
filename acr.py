@@ -124,10 +124,10 @@ def correct_angle(data: Data) -> Data:
     ax1.set_rticks([])
     ax1.set_theta_zero_location("N")
     ax2 = fig.add_axes((
-        d['polar_x'] + 1.5*d['padding_x'],
+        d['polar_x'] + 2 * d['padding_x'],
         d['text_y'] + d['padding_y'],
-        d['kartesian_x'] - 2.5*d['padding_x'],
-        d['kartesian_y'] - 2*d['padding_y']
+        d['kartesian_x'] - 3 * d['padding_x'],
+        d['kartesian_y'] - 2 * d['padding_y']
         ))
     ax2.set_xlim((0,360))
     ax2.set_xticks((0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330,360))
@@ -137,41 +137,47 @@ def correct_angle(data: Data) -> Data:
     sliders = {}
     boxes = {}
     values = {}
-    def _init_sliders_and_boxes():
-        for key, height, valinit, valmin, valmax in (
-                (b, 3/3, 0, 0, 20,),
-                (s, 2/3, 1, .9, 1.1,),
-                (p, 1/3, 0, -90, 90,),
-                ):
-            boxes[key] = TextBox(
-                    ax = fig.add_axes((
-                    1/3 * d['boxes_x'],
-                    height * d['boxes_y'], 
-                    .8/3 * d['boxes_x'], 
+    for key, height, valinit, valmin, valmax in (
+            (b, 3/3, 0, 0, 20,),
+            (s, 2/3, 1, .9, 1.1,),
+            (p, 1/3, 0, -90, 90,),
+            ):
+        fig.text(
+                1/3 * d['boxes_x'],
+                height * d['boxes_y'],
+                key,
+                ha='right',
+                va='center',
+                )
+        sliders[key] = Slider(
+                ax = fig.add_axes((
+                    1/3 * d['boxes_x'] + .2 * d['padding_x'],
+                    height * d['boxes_y'] - .2 * d['padding_y'],
+                    1/3 * d['boxes_x'] - .4 * d['padding_x'],
                     .4 * d['padding_y']
-                        )),
-                    label=key,
-                    initial=str(valinit),
-                    color='w',
-                    label_pad=0.03,
-                    )
-            sliders[key] = Slider(
-                    ax = fig.add_axes((
-                        2/3 * d['boxes_x'],
-                        height * d['boxes_y'], 
-                        1/3 * d['boxes_x'], 
-                        .4 * d['padding_y']
-                        )),
-                    label='',
-                    valinit=valinit,
-                    valmin=valmin,
-                    valmax=valmax,
-                    orientation='horizontal',
-                    )
-    _init_sliders_and_boxes()
+                    )),
+                label='',
+                valinit=valinit,
+                valmin=valmin,
+                valmax=valmax,
+                orientation='horizontal',
+                )
+        sliders[key].valtext.set_visible(False)
+        boxes[key] = TextBox(
+                ax = fig.add_axes((
+                2/3 * d['boxes_x'] - .1 * d['padding_x'],
+                height * d['boxes_y'] - .2 * d['padding_y'], 
+                1/3 * d['boxes_x'] - .9 * d['padding_x'], 
+                .4 * d['padding_y']
+                    )),
+                label='',
+                initial=str(valinit),
+                color='w',
+                )
+        boxes[key].ax.set_frame_on(False)
     reset_button = Button(
             ax = fig.add_axes((
-                d['boxes_x'] + d['text_x'] + d['buttons_x']- 6 * d['padding_x'],
+                d['boxes_x'] + d['text_x'] + d['buttons_x']- 5.5 * d['padding_x'],
                 .5 * d['buttons_y'] - .25 * d['padding_y'],
                 2 * d['padding_x'],
                 .5 * d['padding_y']
@@ -215,7 +221,7 @@ def correct_angle(data: Data) -> Data:
     def slider_changed(val):
         for key in sliders.keys():
             values[key] = sliders[key].val
-            boxes[key].set_val(f'{values[key]:.10g}')
+            boxes[key].set_val(f'{values[key]:.8g}')
         update(values)
     for slider in sliders.values():
         slider.on_changed(slider_changed)
