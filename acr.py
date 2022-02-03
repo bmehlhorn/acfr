@@ -34,7 +34,9 @@ def run(
         print(f'No outputfile specified. Using {outputfile}.') 
     data = read(inputfile)
     data, values = correct_angle(data)
-    write(data, values, outputfile)
+    print(values)
+    if values:
+        write(data, values, outputfile)
 
 
 def read(
@@ -191,10 +193,11 @@ def correct_angle(data: Data) -> Data:
                 )),
             label = 'Save',
             color = 'w',
-            )
+            
     def save_button_click(event):
-        plt.close()
-        return (data, values)
+        global save
+        save = True
+        plt.close('all')
     save_button.on_clicked(save_button_click)
 
 
@@ -231,6 +234,8 @@ def correct_angle(data: Data) -> Data:
         return data
 
     origdata = data.copy()
+    global save 
+    save = False
     mask_up = np.diff(data[a], prepend=-np.inf) > 0
     mask_down = np.diff(data[a], prepend=-np.inf) < 0
     data[a] %= 360
@@ -242,8 +247,11 @@ def correct_angle(data: Data) -> Data:
 
     slider_changed(None)
     plt.show()
-    data = update(values)
-    return (origdata, {})
+    if save:
+        data = update(values)
+        return (data, values)
+    else: 
+        return (data, {})
 
 
 
