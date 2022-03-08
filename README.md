@@ -22,9 +22,9 @@ Run
 python acr.py -i inputfile.dat -o outputfile.acr.dat
 ```
 You will get a window like this:
-![GUI](img/acr_gui_sample_before.png)
+![GUI](doc/img/acr_gui_sample_before.png)
 Then adjust your parameters in the GUI.
-![GUI](img/acr_gui_sample_after.png)
+![GUI](doc/img/acr_gui_sample_after.png)
 Use this at your own risk and check the contents of the script beforehand.
 
 
