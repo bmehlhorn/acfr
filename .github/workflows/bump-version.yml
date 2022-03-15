@@ -1,7 +1,16 @@
 name: Bump Versions
-uses: remorses/bump-version@v8
-with:
-    version_file: ./VERSION
-    prefix: v
-env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: remorses/bump-version@v8
+      with:
+        version_file: ./VERSION
+        prefix: v
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
