@@ -19,6 +19,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Bump version 
+      uses: remorses/bump-version@v8
+      with:
+        version_file: ./VERSION
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
