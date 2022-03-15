@@ -2,5 +2,6 @@
   uses: remorses/bump-version@v8
   with:
       version_file: ./VERSION
+      prefix: v
   env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
